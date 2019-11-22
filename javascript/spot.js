@@ -14,21 +14,18 @@ class Spot {
     constructor(id, token) {
         this.client = new Discord.Client()
 
-        this.channel = this.client.login(token).then(() => {
-            return this.channel = this.client.fetchUser(id).then(u => {
-                return u.createDM();
-            });
+        this.user = this.client.login(token).then(() => {
+                return this.client.fetchUser(id)
         });
-        this.channel.then(c => c.send('On Duty!'));
+        this.user.then(u => u.send('On Duty!'))
     }
 
     message(text) {
-        this.channel.then(c => c.send(text))
+        this.user.then(u => u.send(text))
     }
 
     exit() {
-        this.channel
-            .then(c => c.send('Work finished.'))
+        this.user.then(u => u.send('Work finished.'))
             .finally(() => this.client.destroy())
     }
 }
