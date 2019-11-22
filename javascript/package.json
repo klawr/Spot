@@ -1,0 +1,12 @@
+{
+  "name": "spot",
+  "version": "1.0.0",
+  "description": "JavaScript Message Bot",
+  "main": "spot.js",
+  "repository": "git@github.com:klawr/spot",
+  "author": "Kai Lawrence <mail@kailawrence.de>",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "11.5.1"
+  }
+}
