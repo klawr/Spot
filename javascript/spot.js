@@ -4,6 +4,12 @@ class Spot {
     /**
      * @param {string} id - Discord id of target user for messages.
      * @param {string} token - Bot token.
+     * 
+     * Usage:
+     * spot = new Spot(id, token);
+     * spot.message('i love you');
+     * spot.exit();
+     * 
      */
     constructor(id, token) {
         this.client = new Discord.Client()
