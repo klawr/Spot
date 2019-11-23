@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
+const fs = require('fs')
 
-class Spot {
+module.exports = class Spot {
     /**
      * @param {string} id - Discord id of target user for messages.
      * @param {string} token - Bot token.
@@ -11,7 +12,18 @@ class Spot {
      * spot.exit();
      * 
      */
-    constructor(id, token) {
+    constructor({file, id, token}) {
+        if (file) {
+            const config = fs.readFileSync(file);
+            const auth = JSON.parse(config);
+            id = auth.id;
+            token = auth.token;
+        }
+        else if (!(id && token)) {
+            console.log('spot can not authenticate');
+            return
+        }
+
         this.client = new Discord.Client()
 
         this.user = this.client.login(token).then(() => {
