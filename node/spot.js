@@ -29,15 +29,13 @@ module.exports = class Spot {
         this.user = this.client.login(token).then(() => {
                 return this.client.fetchUser(id)
         });
-        this.user.then(u => u.send('On Duty!'))
     }
 
     message(text) {
-        this.user.then(u => u.send(text))
+        this.user = this.user.then(u => u.send(text).then(() => u));
     }
 
     exit() {
-        this.user.then(u => u.send('Work finished.'))
-            .finally(() => this.client.destroy())
+        this.user.finally(() => this.client.destroy());
     }
 }

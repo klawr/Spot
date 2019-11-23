@@ -26,7 +26,6 @@ class Spot(discord.Client):
             await self.login(token)
             user = await self.fetch_user(id)
             self.channel = await user.create_dm()
-            await self.channel.send('On duty!')
         self.loop.run_until_complete(login(token))
 
     def __enter__(self):
@@ -34,7 +33,6 @@ class Spot(discord.Client):
 
     def exit(self):
         async def goodbye():
-            await self.channel.send('Work finished.')
             await self.logout()
         self.loop.run_until_complete(goodbye())
 
