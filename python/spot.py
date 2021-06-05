@@ -45,7 +45,7 @@ class Spot(discord.Client):
 
     def exit(self):
         async def goodbye():
-            await self.logout()
+            await self.close()
 
         self.loop.run_until_complete(goodbye())
 
