@@ -1,8 +1,8 @@
 import asyncio
+import discord
 import json as json
 
-import discord
-
+from os.path import exists
 
 class Spot(discord.Client):
     """
@@ -21,13 +21,16 @@ class Spot(discord.Client):
         **kwargs
     ):
 
-        if file is not None:
+        if file is not None and exists(file):
             with open(file) as config:
                 auth = json.load(config)
                 id = auth["id"]
                 token = auth["token"]
         elif id is None and token is None:
             print("spot can not authenticate.")
+            return
+        else:
+            print("spot file not found at " + file)
             return
 
         self.loop = loop
@@ -53,4 +56,5 @@ class Spot(discord.Client):
         self.exit()
 
     def message(self, text):
-        self.loop.run_until_complete(self.channel.send(text))
+        if (self.loop):
+            self.loop.run_until_complete(self.channel.send(text))
